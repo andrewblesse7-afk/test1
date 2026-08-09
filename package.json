@@ -1,0 +1,8 @@
+{
+  "name": "dormflow",
+  "version": "1.0.0",
+  "description": "Student residence management portal: maintenance requests and facility bookings",
+  "main": "server.js",
+  "author": "",
+  "license": "MIT"
+}
