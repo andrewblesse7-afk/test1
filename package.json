@@ -4,5 +4,9 @@
   "description": "Student residence management portal: maintenance requests and facility bookings",
   "main": "server.js",
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  }
 }
