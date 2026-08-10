@@ -3,6 +3,9 @@ const express = require("express");
 const app = express();
 const PORT = 3000;
 
+// Serve static files (HTML, CSS, JS) from the "public" folder
+app.use(express.static("public"));
+
 // Health check route: used to verify that the server is running
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
