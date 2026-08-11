@@ -19,6 +19,18 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
+// 404 handler: runs when no route or static file matched the request
+app.use((req, res) => {
+  res.status(404).json({ error: "Not found" });
+});
+
+// Error handler: runs when a route passes an error to next(err)
+// Express recognizes it by the four parameters (err first)
+app.use((err, req, res, next) => {
+  console.error(err.message);
+  res.status(500).json({ error: "Internal server error" });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
