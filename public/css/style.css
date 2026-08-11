@@ -1,0 +1,157 @@
+/* Base styles for DormFlow */
+
+:root {
+  --primary: #2b6cb0;
+  --primary-dark: #234e7d;
+  --bg: #f5f7fa;
+  --surface: #ffffff;
+  --text: #1f2933;
+  --muted: #6b7280;
+  --border: #e2e8f0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Navigation bar */
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.brand {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.brand:hover {
+  text-decoration: none;
+}
+
+.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  color: var(--text);
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+/* Main content container */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Hero section */
+.hero {
+  padding: 40px 0;
+}
+
+.hero h1 {
+  font-size: 2rem;
+  margin: 0 0 12px;
+}
+
+.hero p {
+  color: var(--muted);
+  max-width: 640px;
+}
+
+/* Section headings */
+section h2 {
+  font-size: 1.4rem;
+  margin-top: 32px;
+}
+
+/* Service cards */
+.cards {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1 1 240px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+/* Announcements */
+.announcement-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.announcement {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+}
+
+.announcement h3 {
+  margin: 0 0 4px;
+}
+
+.announcement .meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0 0 8px;
+}
+
+/* Footer */
+.site-footer {
+  max-width: 960px;
+  margin: 40px auto 0;
+  padding: 20px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  text-align: center;
+}
