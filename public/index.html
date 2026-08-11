@@ -3,10 +3,76 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DormFlow</title>
+    <title>DormFlow — Student Residence Portal</title>
   </head>
   <body>
-    <h1>DormFlow</h1>
-    <p>Static files are served from the public folder.</p>
+    <header class="site-header">
+      <div class="brand">DormFlow</div>
+      <p class="tagline">Student Residence Management Portal</p>
+    </header>
+
+    <main>
+      <!-- Hero: short description of the project -->
+      <section class="hero">
+        <h1>Manage your dorm life in one place</h1>
+        <p>
+          DormFlow helps students of the residence report maintenance problems
+          and book shared facilities. Administrators handle requests, manage
+          rooms and post announcements.
+        </p>
+      </section>
+
+      <!-- Services: what users can do in the portal -->
+      <section class="services">
+        <h2>What you can do</h2>
+        <div class="cards">
+          <article class="card">
+            <h3>Report maintenance</h3>
+            <p>
+              Submit a repair request for plumbing, heating, electricity and
+              more, then track its status.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Book facilities</h3>
+            <p>
+              Reserve the laundry room, study room or gym in free time slots
+              without overlaps.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Read announcements</h3>
+            <p>
+              Stay up to date with news and important notices from the
+              residence administration.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Latest announcements: static sample data for now, replaced by fetch later -->
+      <section class="announcements">
+        <h2>Latest announcements</h2>
+        <ul class="announcement-list">
+          <li class="announcement">
+            <h3>Water shutdown on Friday</h3>
+            <p class="meta">General • March 10</p>
+            <p>
+              Cold water will be temporarily off from 9:00 to 13:00 for
+              scheduled maintenance.
+            </p>
+          </li>
+          <li class="announcement">
+            <h3>New gym opening hours</h3>
+            <p class="meta">Facilities • March 8</p>
+            <p>The gym room is now open from 7:00 to 23:00 every day.</p>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>DormFlow — student project</p>
+    </footer>
   </body>
 </html>
