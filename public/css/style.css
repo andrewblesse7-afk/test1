@@ -211,14 +211,16 @@ section h2 {
   background: var(--primary-dark);
 }
 
-/* Request list */
-.request-list {
+/* Request and booking lists (shared card style) */
+.request-list,
+.booking-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.request {
+.request,
+.booking {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -226,18 +228,21 @@ section h2 {
   margin-bottom: 12px;
 }
 
-.request-header {
+.request-header,
+.booking-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
 }
 
-.request-header h3 {
+.request-header h3,
+.booking-header h3 {
   margin: 0;
 }
 
-.request-meta {
+.request-meta,
+.booking-meta {
   color: var(--muted);
   font-size: 0.9rem;
   margin: 4px 0 8px;
@@ -275,6 +280,16 @@ section h2 {
 .status-rejected {
   background: #fee2e2;
   color: #991b1b;
+}
+
+.status-active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-cancelled {
+  background: #e2e8f0;
+  color: #334155;
 }
 
 /* Wider screens (tablet and up): horizontal navbar, bigger hero heading */

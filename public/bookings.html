@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookings — DormFlow</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Shared navigation bar (same markup on every page) -->
+    <header class="site-header">
+      <nav class="navbar">
+        <a class="brand" href="/">DormFlow</a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/requests.html">Requests</a></li>
+          <li><a href="/bookings.html">Bookings</a></li>
+          <li><a href="/announcements.html">Announcements</a></li>
+          <li><a href="/activity.html">Activity</a></li>
+          <li><a href="/login.html">Login</a></li>
+          <li><a href="/register.html">Register</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h1 class="page-title">Facility bookings</h1>
+
+      <!-- Booking form. Not connected yet; wired to the API in Phase 6. -->
+      <section class="form-section">
+        <h2>New booking</h2>
+        <form class="form" id="booking-form">
+          <div class="form-group">
+            <label for="facility">Facility</label>
+            <select id="facility" name="facility">
+              <option>Laundry Room</option>
+              <option>Study Room</option>
+              <option>Common Room</option>
+              <option>Gym Room</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" required />
+          </div>
+          <div class="form-group">
+            <label for="startTime">Start time</label>
+            <input type="time" id="startTime" name="startTime" required />
+          </div>
+          <div class="form-group">
+            <label for="endTime">End time</label>
+            <input type="time" id="endTime" name="endTime" required />
+          </div>
+          <button type="submit" class="btn btn-primary">Book slot</button>
+        </form>
+      </section>
+
+      <!-- Bookings list: static sample data for now, replaced by fetch in Phase 6. -->
+      <section class="list-section">
+        <h2>My bookings</h2>
+        <ul class="booking-list">
+          <li class="booking">
+            <div class="booking-header">
+              <h3>Study Room</h3>
+              <span class="badge status-active">Active</span>
+            </div>
+            <p class="booking-meta">March 12 • 14:00 – 15:00</p>
+          </li>
+          <li class="booking">
+            <div class="booking-header">
+              <h3>Gym Room</h3>
+              <span class="badge status-active">Active</span>
+            </div>
+            <p class="booking-meta">March 13 • 18:00 – 19:00</p>
+          </li>
+          <li class="booking">
+            <div class="booking-header">
+              <h3>Laundry Room</h3>
+              <span class="badge status-cancelled">Cancelled</span>
+            </div>
+            <p class="booking-meta">March 8 • 10:00 – 11:00</p>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>DormFlow — student project</p>
+    </footer>
+  </body>
+</html>
