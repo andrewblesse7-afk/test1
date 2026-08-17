@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Requests — DormFlow</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Shared navigation bar (same markup on every page) -->
+    <header class="site-header">
+      <nav class="navbar">
+        <a class="brand" href="/">DormFlow</a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/requests.html">Requests</a></li>
+          <li><a href="/bookings.html">Bookings</a></li>
+          <li><a href="/announcements.html">Announcements</a></li>
+          <li><a href="/activity.html">Activity</a></li>
+          <li><a href="/login.html">Login</a></li>
+          <li><a href="/register.html">Register</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h1 class="page-title">Maintenance requests</h1>
+
+      <!-- Create request form. Not connected yet; wired to the API in Phase 3. -->
+      <section class="form-section">
+        <h2>New request</h2>
+        <form class="form" id="request-form">
+          <div class="form-group">
+            <label for="resident">Your name</label>
+            <input type="text" id="resident" name="resident" required />
+          </div>
+          <div class="form-group">
+            <label for="roomNumber">Room number</label>
+            <input type="text" id="roomNumber" name="roomNumber" required />
+          </div>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" name="category">
+              <option>Plumbing</option>
+              <option>Electricity</option>
+              <option>Heating</option>
+              <option>Furniture</option>
+              <option>Internet</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="priority">Priority</label>
+            <select id="priority" name="priority">
+              <option>Low</option>
+              <option>Medium</option>
+              <option>High</option>
+              <option>Urgent</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="3" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit request</button>
+        </form>
+      </section>
+
+      <!-- Requests list: static sample data for now, replaced by fetch in Phase 3. -->
+      <section class="list-section">
+        <h2>All requests</h2>
+        <ul class="request-list">
+          <li class="request">
+            <div class="request-header">
+              <h3>Plumbing</h3>
+              <span class="badge status-submitted">Submitted</span>
+            </div>
+            <p class="request-meta">Room 204 • Priority: High • March 10</p>
+            <p>The sink in the bathroom is leaking and water collects on the floor.</p>
+          </li>
+          <li class="request">
+            <div class="request-header">
+              <h3>Heating</h3>
+              <span class="badge status-in-progress">In Progress</span>
+            </div>
+            <p class="request-meta">Room 112 • Priority: Urgent • March 9</p>
+            <p>The radiator does not heat up and the room is very cold.</p>
+          </li>
+          <li class="request">
+            <div class="request-header">
+              <h3>Internet</h3>
+              <span class="badge status-completed">Completed</span>
+            </div>
+            <p class="request-meta">Room 305 • Priority: Medium • March 5</p>
+            <p>Wi-Fi was not working in the room. Fixed by the technician.</p>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>DormFlow — student project</p>
+    </footer>
+  </body>
+</html>
