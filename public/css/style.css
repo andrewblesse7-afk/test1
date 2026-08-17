@@ -292,6 +292,27 @@ section h2 {
   color: #334155;
 }
 
+/* Status history list */
+.history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.history-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+}
+
+.history-item .meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 4px 0 0;
+}
+
 /* Wider screens (tablet and up): horizontal navbar, bigger hero heading */
 @media (min-width: 640px) {
   .navbar {
