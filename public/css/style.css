@@ -211,6 +211,20 @@ section h2 {
   background: var(--primary-dark);
 }
 
+/* Form feedback message */
+.message {
+  margin-top: 10px;
+  font-size: 0.95rem;
+}
+
+.message.success {
+  color: #166534;
+}
+
+.message.error {
+  color: #991b1b;
+}
+
 /* Request and booking lists (shared card style) */
 .request-list,
 .booking-list {
