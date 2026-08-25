@@ -1,9 +1,13 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const requestRoutes = require("./routes/requestRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Parse JSON request bodies (needed for POST and PATCH)
+app.use(express.json());
 
 // Connect to MongoDB using the connection string from .env
 mongoose
@@ -18,6 +22,9 @@ app.use(express.static("public"));
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
+
+// Maintenance request routes
+app.use("/api/requests", requestRoutes);
 
 // 404 handler: runs when no route or static file matched the request
 app.use((req, res) => {
