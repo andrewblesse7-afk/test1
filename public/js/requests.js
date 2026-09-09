@@ -6,9 +6,8 @@ form.addEventListener("submit", async (event) => {
   event.preventDefault();
   message.textContent = "";
 
-  // collect the values the student typed into the form
+  // the owner is not sent: the server takes it from the token
   const newRequest = {
-    resident: form.resident.value,
     roomNumber: form.roomNumber.value,
     category: form.category.value,
     priority: form.priority.value,
@@ -18,7 +17,7 @@ form.addEventListener("submit", async (event) => {
   try {
     const response = await fetch("/api/requests", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...authHeaders() },
       body: JSON.stringify(newRequest),
     });
 
@@ -72,7 +71,15 @@ function renderRequest(request) {
 // Load all requests from the API and draw them on the page
 async function loadRequests() {
   try {
-    const response = await fetch("/api/requests");
+    const response = await fetch("/api/requests", { headers: authHeaders() });
+
+    // the token is missing or has expired, so ask the student to log in again
+    if (response.status === 401) {
+      clearToken();
+      window.location.href = "/login.html";
+      return;
+    }
+
     if (!response.ok) {
       list.textContent = "Could not load requests.";
       return;
@@ -94,4 +101,9 @@ async function loadRequests() {
   }
 }
 
-loadRequests(); // fill the list when the page opens
+// this page only makes sense for a logged in student
+if (!getToken()) {
+  window.location.href = "/login.html";
+} else {
+  loadRequests(); // fill the list when the page opens
+}

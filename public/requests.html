@@ -26,14 +26,10 @@
     <main>
       <h1 class="page-title">Maintenance requests</h1>
 
-      <!-- Create request form. Not connected yet; wired to the API in Phase 3. -->
+      <!-- Create request form. The owner is taken from the login token. -->
       <section class="form-section">
         <h2>New request</h2>
         <form class="form" id="request-form">
-          <div class="form-group">
-            <label for="resident">Your name</label>
-            <input type="text" id="resident" name="resident" required />
-          </div>
           <div class="form-group">
             <label for="roomNumber">Room number</label>
             <input type="text" id="roomNumber" name="roomNumber" required />
@@ -78,6 +74,7 @@
       <p>DormFlow — student project</p>
     </footer>
 
+    <script src="/js/auth.js"></script>
     <script src="/js/requests.js"></script>
   </body>
 </html>
