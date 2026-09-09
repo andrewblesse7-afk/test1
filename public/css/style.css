@@ -75,6 +75,12 @@ a:hover {
   text-decoration: none;
 }
 
+/* Name of the logged in user in the navigation bar */
+.nav-user {
+  color: var(--muted);
+  font-weight: 600;
+}
+
 /* Main content container */
 main {
   max-width: 960px;
