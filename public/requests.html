@@ -67,35 +67,10 @@
         <p id="form-message" class="message"></p>
       </section>
 
-      <!-- Requests list: static sample data for now, replaced by fetch in Phase 3. -->
+      <!-- Requests list: filled from the API by js/requests.js -->
       <section class="list-section">
         <h2>All requests</h2>
-        <ul class="request-list">
-          <li class="request">
-            <div class="request-header">
-              <h3>Plumbing</h3>
-              <span class="badge status-submitted">Submitted</span>
-            </div>
-            <p class="request-meta">Room 204 • Priority: High • March 10</p>
-            <p>The sink in the bathroom is leaking and water collects on the floor.</p>
-          </li>
-          <li class="request">
-            <div class="request-header">
-              <h3>Heating</h3>
-              <span class="badge status-in-progress">In Progress</span>
-            </div>
-            <p class="request-meta">Room 112 • Priority: Urgent • March 9</p>
-            <p>The radiator does not heat up and the room is very cold.</p>
-          </li>
-          <li class="request">
-            <div class="request-header">
-              <h3>Internet</h3>
-              <span class="badge status-completed">Completed</span>
-            </div>
-            <p class="request-meta">Room 305 • Priority: Medium • March 5</p>
-            <p>Wi-Fi was not working in the room. Fixed by the technician.</p>
-          </li>
-        </ul>
+        <ul class="request-list" id="request-list"></ul>
       </section>
     </main>
 
