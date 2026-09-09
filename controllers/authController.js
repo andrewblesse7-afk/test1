@@ -82,4 +82,16 @@ async function login(req, res, next) {
   }
 }
 
-module.exports = { register, login };
+// GET /api/auth/me — data about the user who owns the token
+function me(req, res) {
+  // req.user was loaded from the database by the auth middleware
+  res.json({
+    id: req.user._id,
+    name: req.user.name,
+    email: req.user.email,
+    roomNumber: req.user.roomNumber,
+    role: req.user.role,
+  });
+}
+
+module.exports = { register, login, me };
