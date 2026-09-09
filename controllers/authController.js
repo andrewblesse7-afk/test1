@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
 // POST /api/auth/register — create a new account
@@ -35,4 +36,50 @@ async function register(req, res, next) {
   }
 }
 
-module.exports = { register };
+// POST /api/auth/login — check the password and give back a token
+async function login(req, res, next) {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ error: "Email and password are required" });
+    }
+
+    // passwordHash has select: false in the model, so it must be asked for
+    const user = await User.findOne({
+      email: email.toLowerCase().trim(),
+    }).select("+passwordHash");
+
+    // the same message in both cases, so nobody can find out which emails exist
+    if (!user) {
+      return res.status(401).json({ error: "Invalid email or password" });
+    }
+
+    const passwordMatches = await bcrypt.compare(password, user.passwordHash);
+    if (!passwordMatches) {
+      return res.status(401).json({ error: "Invalid email or password" });
+    }
+
+    // the token says who the user is; it is signed with the secret from .env
+    const token = jwt.sign(
+      { id: user._id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    res.json({
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        roomNumber: user.roomNumber,
+        role: user.role,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { register, login };
