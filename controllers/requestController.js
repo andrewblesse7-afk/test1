@@ -3,9 +3,10 @@ const MaintenanceRequest = require("../models/MaintenanceRequest");
 // POST /api/requests — create a new request
 async function createRequest(req, res, next) {
   try {
-    const { resident, roomNumber, category, description, priority } = req.body;
+    const { roomNumber, category, description, priority } = req.body;
     const request = await MaintenanceRequest.create({
-      resident,
+      // the owner comes from the token, so nobody can post as another student
+      resident: req.user._id,
       roomNumber,
       category,
       description,

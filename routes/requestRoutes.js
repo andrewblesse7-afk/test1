@@ -7,6 +7,10 @@ const {
   updateRequest,
   deleteRequest,
 } = require("../controllers/requestController");
+const auth = require("../middleware/auth");
+
+// Every route below needs a valid token
+router.use(auth);
 
 // Paths are relative to the mount point (/api/requests, set in server.js)
 router.get("/", getRequests);

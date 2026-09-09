@@ -1,11 +1,14 @@
 const mongoose = require("mongoose");
 
 // Maintenance request submitted by a student.
-// "resident" holds the student's name as a string for now;
-// it becomes a reference to the User model in Phase 4.
+// "resident" points to the User who created the request.
 const maintenanceRequestSchema = new mongoose.Schema(
   {
-    resident: { type: String, required: true },
+    resident: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     roomNumber: { type: String, required: true },
     category: {
       type: String,
