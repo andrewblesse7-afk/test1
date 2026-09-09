@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const requestRoutes = require("./routes/requestRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,6 +23,9 @@ app.use(express.static("public"));
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
+
+// Authentication routes
+app.use("/api/auth", authRoutes);
 
 // Maintenance request routes
 app.use("/api/requests", requestRoutes);
