@@ -26,39 +26,35 @@
     <main>
       <h1 class="page-title">Announcements</h1>
 
-      <!-- Announcements list: static sample data for now, replaced by fetch in Phase 8. -->
+      <!-- Only administrators see this form -->
+      <section class="form-section" id="admin-section" hidden>
+        <h2>New announcement</h2>
+        <form class="form" id="announcement-form">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" required />
+          </div>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" name="category">
+              <option>General</option>
+              <option>Facilities</option>
+              <option>Maintenance</option>
+              <option>Events</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="content">Content</label>
+            <textarea id="content" name="content" rows="3" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Publish</button>
+        </form>
+        <p id="form-message" class="message"></p>
+      </section>
+
+      <!-- Announcements: filled from the API by js/announcements.js -->
       <section class="list-section">
-        <ul class="announcement-list">
-          <li class="announcement">
-            <h3>Water shutdown on Friday</h3>
-            <p class="meta">General • March 10</p>
-            <p>
-              Cold water will be temporarily off from 9:00 to 13:00 for
-              scheduled maintenance. Please store some water in advance.
-            </p>
-          </li>
-          <li class="announcement">
-            <h3>New gym opening hours</h3>
-            <p class="meta">Facilities • March 8</p>
-            <p>The gym room is now open from 7:00 to 23:00 every day.</p>
-          </li>
-          <li class="announcement">
-            <h3>Laundry room maintenance</h3>
-            <p class="meta">Facilities • March 4</p>
-            <p>
-              One washing machine will be out of service until the end of the
-              week. Please use the remaining machines.
-            </p>
-          </li>
-          <li class="announcement">
-            <h3>Quiet hours reminder</h3>
-            <p class="meta">General • March 1</p>
-            <p>
-              Quiet hours are from 23:00 to 7:00. Please be considerate of your
-              neighbours during exam season.
-            </p>
-          </li>
-        </ul>
+        <ul class="announcement-list" id="announcement-list"></ul>
       </section>
     </main>
 
@@ -67,5 +63,6 @@
     </footer>
 
     <script src="/js/auth.js"></script>
+    <script src="/js/announcements.js"></script>
   </body>
 </html>
