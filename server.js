@@ -5,6 +5,7 @@ const requestRoutes = require("./routes/requestRoutes");
 const authRoutes = require("./routes/authRoutes");
 const facilityRoutes = require("./routes/facilityRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
+const announcementRoutes = require("./routes/announcementRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -37,6 +38,9 @@ app.use("/api/facilities", facilityRoutes);
 
 // Booking routes
 app.use("/api/bookings", bookingRoutes);
+
+// Announcement routes
+app.use("/api/announcements", announcementRoutes);
 
 // 404 handler: runs when no route or static file matched the request
 app.use((req, res) => {
