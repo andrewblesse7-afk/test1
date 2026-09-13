@@ -110,4 +110,38 @@ async function getBookingById(req, res, next) {
   }
 }
 
-module.exports = { createBooking, getBookings, getBookingById };
+// DELETE /api/bookings/:id — cancel a booking
+async function cancelBooking(req, res, next) {
+  try {
+    const booking = await Booking.findById(req.params.id);
+    if (!booking) {
+      return res.status(404).json({ error: "Booking not found" });
+    }
+    if (!canAccess(req.user, booking)) {
+      return res
+        .status(403)
+        .json({ error: "You can only cancel your own bookings" });
+    }
+    if (booking.status === "Cancelled") {
+      return res
+        .status(409)
+        .json({ error: "This booking is already cancelled" });
+    }
+
+    // The row is kept so the history stays complete. The slot becomes free on
+    // its own, because the unique index only covers Active bookings.
+    booking.status = "Cancelled";
+    await booking.save();
+
+    res.json(booking);
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = {
+  createBooking,
+  getBookings,
+  getBookingById,
+  cancelBooking,
+};
