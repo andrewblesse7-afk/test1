@@ -43,6 +43,16 @@ async function showCurrentUser() {
     .querySelectorAll('a[href="/login.html"], a[href="/register.html"]')
     .forEach((link) => link.parentElement.remove());
 
+  // the dashboard link is only shown to administrators
+  if (user.role === "admin" && !navLinks.querySelector('a[href="/admin.html"]')) {
+    const adminItem = document.createElement("li");
+    const adminLink = document.createElement("a");
+    adminLink.href = "/admin.html";
+    adminLink.textContent = "Admin";
+    adminItem.append(adminLink);
+    navLinks.append(adminItem);
+  }
+
   const userItem = document.createElement("li");
   userItem.className = "nav-user";
   userItem.textContent = user.name;
