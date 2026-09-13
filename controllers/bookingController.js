@@ -36,6 +36,21 @@ async function createBooking(req, res, next) {
       return res.status(400).json({ error: "Cannot book a time in the past" });
     }
 
+    // Two slots overlap when the new one starts before the old one ends
+    // and ends after the old one starts. Only Active bookings block a slot.
+    const overlapping = await Booking.findOne({
+      facilityId,
+      status: "Active",
+      startAt: { $lt: end },
+      endAt: { $gt: start },
+    });
+
+    if (overlapping) {
+      return res
+        .status(409)
+        .json({ error: "This time slot is already booked" });
+    }
+
     const booking = await Booking.create({
       // the owner comes from the token, not from the body
       userId: req.user._id,
@@ -46,6 +61,14 @@ async function createBooking(req, res, next) {
 
     res.status(201).json(booking);
   } catch (err) {
+    // 11000 is the duplicate key error from the unique slot index. It happens
+    // when two requests pass the check above at the same moment: the database
+    // lets only one of them in.
+    if (err.code === 11000) {
+      return res
+        .status(409)
+        .json({ error: "This time slot is already booked" });
+    }
     next(err);
   }
 }
