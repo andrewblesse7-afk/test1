@@ -23,7 +23,14 @@ const maintenanceRequestSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["Submitted", "Reviewed", "In Progress", "Completed", "Rejected"],
+      enum: [
+        "Submitted",
+        "Reviewed",
+        "In Progress",
+        "Completed",
+        "Rejected",
+        "Cancelled",
+      ],
       default: "Submitted",
     },
     adminComment: { type: String, default: "" },

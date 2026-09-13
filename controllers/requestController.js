@@ -18,6 +18,17 @@ async function createRequest(req, res, next) {
   }
 }
 
+// Which status may follow which. An empty list means the status is final,
+// so a finished request can never go back to the beginning.
+const allowedTransitions = {
+  Submitted: ["Reviewed", "Rejected", "Cancelled"],
+  Reviewed: ["In Progress", "Rejected"],
+  "In Progress": ["Completed"],
+  Completed: [],
+  Rejected: [],
+  Cancelled: [],
+};
+
 // A student may only touch their own requests, an admin may touch any of them
 function canAccess(user, request) {
   return user.role === "admin" || request.resident.equals(user._id);
@@ -107,10 +118,59 @@ async function deleteRequest(req, res, next) {
   }
 }
 
+// PATCH /api/requests/:id/status — the only place where the status changes
+async function updateRequestStatus(req, res, next) {
+  try {
+    const { status, comment } = req.body;
+
+    if (!status) {
+      return res.status(400).json({ error: "New status is required" });
+    }
+
+    const request = await MaintenanceRequest.findById(req.params.id);
+    if (!request) {
+      return res.status(404).json({ error: "Request not found" });
+    }
+
+    const isAdmin = req.user.role === "admin";
+    const isOwner = request.resident.equals(req.user._id);
+
+    // a student may only cancel their own request while it is still Submitted
+    const studentMayCancel =
+      isOwner && status === "Cancelled" && request.status === "Submitted";
+
+    if (!isAdmin && !studentMayCancel) {
+      return res
+        .status(403)
+        .json({ error: "Only an administrator can change the status" });
+    }
+
+    // the transition table decides, not the client
+    const allowed = allowedTransitions[request.status] || [];
+    if (!allowed.includes(status)) {
+      return res.status(409).json({
+        error: `Cannot change status from "${request.status}" to "${status}"`,
+      });
+    }
+
+    request.status = status;
+    if (isAdmin && comment) {
+      request.adminComment = comment;
+    }
+    await request.save();
+
+    res.json(request);
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   createRequest,
   getRequests,
   getRequestById,
   updateRequest,
   deleteRequest,
+  updateRequestStatus,
+  allowedTransitions, // exported so the workflow table can be checked and reused
 };

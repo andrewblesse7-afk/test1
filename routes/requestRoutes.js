@@ -6,6 +6,7 @@ const {
   getRequestById,
   updateRequest,
   deleteRequest,
+  updateRequestStatus,
 } = require("../controllers/requestController");
 const auth = require("../middleware/auth");
 
@@ -18,5 +19,8 @@ router.post("/", createRequest);
 router.get("/:id", getRequestById);
 router.patch("/:id", updateRequest);
 router.delete("/:id", deleteRequest);
+
+// the status has its own endpoint: the normal PATCH above never changes it
+router.patch("/:id/status", updateRequestStatus);
 
 module.exports = router;
