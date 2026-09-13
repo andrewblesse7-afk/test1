@@ -34,6 +34,16 @@ const maintenanceRequestSchema = new mongoose.Schema(
       default: "Submitted",
     },
     adminComment: { type: String, default: "" },
+    // Journal of every status change. Entries are only added, never edited.
+    statusHistory: [
+      {
+        from: String,
+        to: String,
+        changedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        comment: String,
+        changedAt: { type: Date, default: Date.now },
+      },
+    ],
   },
   { timestamps: true } // adds createdAt and updatedAt automatically
 );

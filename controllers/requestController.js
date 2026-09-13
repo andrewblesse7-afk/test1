@@ -153,13 +153,28 @@ async function updateRequestStatus(req, res, next) {
       });
     }
 
-    request.status = status;
-    if (isAdmin && comment) {
-      request.adminComment = comment;
-    }
-    await request.save();
+    // one entry per change: who moved the request, from where, to where and when
+    const historyEntry = {
+      from: request.status,
+      to: status,
+      changedBy: req.user._id,
+      comment: comment || "",
+      changedAt: new Date(),
+    };
 
-    res.json(request);
+    const updates = { status };
+    if (isAdmin && comment) {
+      updates.adminComment = comment;
+    }
+
+    // $push only adds to the array, so older entries can never be lost
+    const updated = await MaintenanceRequest.findByIdAndUpdate(
+      request._id,
+      { $set: updates, $push: { statusHistory: historyEntry } },
+      { new: true, runValidators: true }
+    );
+
+    res.json(updated);
   } catch (err) {
     next(err);
   }
