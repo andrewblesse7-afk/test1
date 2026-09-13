@@ -6,6 +6,7 @@ const authRoutes = require("./routes/authRoutes");
 const facilityRoutes = require("./routes/facilityRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const announcementRoutes = require("./routes/announcementRoutes");
+const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -48,11 +49,7 @@ app.use((req, res) => {
 });
 
 // Error handler: runs when a route passes an error to next(err)
-// Express recognizes it by the four parameters (err first)
-app.use((err, req, res, next) => {
-  console.error(err.message);
-  res.status(500).json({ error: "Internal server error" });
-});
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
