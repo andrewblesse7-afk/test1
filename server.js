@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const requestRoutes = require("./routes/requestRoutes");
 const authRoutes = require("./routes/authRoutes");
+const facilityRoutes = require("./routes/facilityRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -29,6 +30,9 @@ app.use("/api/auth", authRoutes);
 
 // Maintenance request routes
 app.use("/api/requests", requestRoutes);
+
+// Facility routes
+app.use("/api/facilities", facilityRoutes);
 
 // 404 handler: runs when no route or static file matched the request
 app.use((req, res) => {
