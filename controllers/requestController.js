@@ -41,9 +41,10 @@ async function getRequests(req, res, next) {
     const filter =
       req.user.role === "admin" ? {} : { resident: req.user._id };
 
-    const requests = await MaintenanceRequest.find(filter).sort({
-      createdAt: -1,
-    });
+    const requests = await MaintenanceRequest.find(filter)
+      // show who changed the status instead of a bare id
+      .populate("statusHistory.changedBy", "name")
+      .sort({ createdAt: -1 });
     res.json(requests);
   } catch (err) {
     next(err);

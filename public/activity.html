@@ -26,80 +26,26 @@
     <main>
       <h1 class="page-title">My activity</h1>
 
-      <!-- All sections use static sample data for now, replaced by fetch in Phase 7. -->
+      <!-- All lists are filled from the API by js/activity.js -->
 
       <section class="list-section">
         <h2>My requests</h2>
-        <ul class="request-list">
-          <li class="request">
-            <div class="request-header">
-              <h3>Plumbing</h3>
-              <span class="badge status-reviewed">Reviewed</span>
-            </div>
-            <p class="request-meta">Room 204 • Priority: High • March 10</p>
-            <p>The sink in the bathroom is leaking and water collects on the floor.</p>
-          </li>
-          <li class="request">
-            <div class="request-header">
-              <h3>Heating</h3>
-              <span class="badge status-in-progress">In Progress</span>
-            </div>
-            <p class="request-meta">Room 204 • Priority: Urgent • March 9</p>
-            <p>The radiator does not heat up and the room is very cold.</p>
-          </li>
-        </ul>
+        <ul class="request-list" id="activity-requests"></ul>
       </section>
 
       <section class="list-section">
         <h2>Upcoming bookings</h2>
-        <ul class="booking-list">
-          <li class="booking">
-            <div class="booking-header">
-              <h3>Study Room</h3>
-              <span class="badge status-active">Active</span>
-            </div>
-            <p class="booking-meta">March 20 • 14:00 – 15:00</p>
-          </li>
-          <li class="booking">
-            <div class="booking-header">
-              <h3>Gym Room</h3>
-              <span class="badge status-active">Active</span>
-            </div>
-            <p class="booking-meta">March 22 • 18:00 – 19:00</p>
-          </li>
-        </ul>
+        <ul class="booking-list" id="upcoming-bookings"></ul>
       </section>
 
       <section class="list-section">
         <h2>Past bookings</h2>
-        <ul class="booking-list">
-          <li class="booking">
-            <div class="booking-header">
-              <h3>Laundry Room</h3>
-            </div>
-            <p class="booking-meta">March 2 • 10:00 – 11:00</p>
-          </li>
-          <li class="booking">
-            <div class="booking-header">
-              <h3>Common Room</h3>
-            </div>
-            <p class="booking-meta">February 28 • 16:00 – 17:00</p>
-          </li>
-        </ul>
+        <ul class="booking-list" id="past-bookings"></ul>
       </section>
 
       <section class="list-section">
         <h2>Recent status changes</h2>
-        <ul class="history-list">
-          <li class="history-item">
-            <strong>Plumbing (Room 204):</strong> Submitted → Reviewed
-            <p class="meta">Changed by admin • March 10</p>
-          </li>
-          <li class="history-item">
-            <strong>Heating (Room 204):</strong> Reviewed → In Progress
-            <p class="meta">Changed by admin • March 9</p>
-          </li>
-        </ul>
+        <ul class="history-list" id="status-changes"></ul>
       </section>
     </main>
 
@@ -108,5 +54,6 @@
     </footer>
 
     <script src="/js/auth.js"></script>
+    <script src="/js/activity.js"></script>
   </body>
 </html>
