@@ -16,12 +16,32 @@ async function createBooking(req, res, next) {
         .json({ error: "Facility, start time and end time are required" });
     }
 
+    const start = new Date(startAt);
+    const end = new Date(endAt);
+
+    // an unreadable date becomes an "Invalid Date", which has a NaN time
+    if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
+      return res
+        .status(400)
+        .json({ error: "Start and end time must be valid dates" });
+    }
+
+    if (end <= start) {
+      return res
+        .status(400)
+        .json({ error: "End time must be after start time" });
+    }
+
+    if (start < new Date()) {
+      return res.status(400).json({ error: "Cannot book a time in the past" });
+    }
+
     const booking = await Booking.create({
       // the owner comes from the token, not from the body
       userId: req.user._id,
       facilityId,
-      startAt,
-      endAt,
+      startAt: start,
+      endAt: end,
     });
 
     res.status(201).json(booking);
