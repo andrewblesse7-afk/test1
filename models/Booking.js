@@ -37,4 +37,7 @@ bookingSchema.index(
   { unique: true, partialFilterExpression: { status: "Active" } }
 );
 
+// Index for "my bookings": find one user's bookings, newest slot first
+bookingSchema.index({ userId: 1, startAt: -1 });
+
 module.exports = mongoose.model("Booking", bookingSchema);

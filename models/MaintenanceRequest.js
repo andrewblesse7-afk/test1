@@ -48,4 +48,10 @@ const maintenanceRequestSchema = new mongoose.Schema(
   { timestamps: true } // adds createdAt and updatedAt automatically
 );
 
+// Indexes for the two lists the application asks for most often.
+// Without an index MongoDB reads the whole collection; with one it goes
+// straight to the matching documents, already in the right order.
+maintenanceRequestSchema.index({ status: 1, createdAt: -1 }); // admin list by status
+maintenanceRequestSchema.index({ resident: 1, createdAt: -1 }); // "my requests"
+
 module.exports = mongoose.model("MaintenanceRequest", maintenanceRequestSchema);
